@@ -9,6 +9,9 @@
 #endif
 
 #include <math.h>
+#include <iostream>
+
+using namespace std;
 
 
 // the window's width and height
@@ -20,6 +23,25 @@ void init(void)
     width = 600;
     height = 600;
     vertex = 18;
+
+    cout << "Current Number of Verticies: " << vertex << endl;
+}
+
+void keyboardEvts(unsigned char key, int x, int y)
+{
+    if (key == '-' && vertex > 3)
+    {
+        vertex--;
+        cout << "Current Number of Verticies: " << vertex << endl;
+    }
+    
+    else if (key == '+' && vertex < 100)
+    {
+        vertex++;
+        cout << "Current Number of Verticies: " << vertex << endl;
+    }
+
+    glutPostRedisplay();
 }
 
 void drawFilledCircle(float red, float green, float blue, float center_x, float center_y, float radius)
@@ -161,7 +183,7 @@ int main(int argc, char* argv[])
     glutInitWindowSize((int)width, (int)height);
 
     // create the window with a title
-    glutCreateWindow("First OpenGL Program");
+    glutCreateWindow("Conor Race - My Panda Friend :3");
 
     /* --- register callbacks with GLUT --- */
 
@@ -170,6 +192,9 @@ int main(int argc, char* argv[])
 
     //register function that draws in the window
     glutDisplayFunc(display);
+
+    // Register funtion that reads in keyboard input:
+    glutKeyboardFunc(keyboardEvts);
 
     //start the glut main loop
     glutMainLoop();
