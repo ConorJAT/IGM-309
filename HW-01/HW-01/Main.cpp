@@ -19,12 +19,13 @@ void init(void)
     // initialize the size of the window
     width = 600;
     height = 600;
-    vertex = 50;
+    vertex = 18;
 }
 
 void drawFilledCircle(float red, float green, float blue, float center_x, float center_y, float radius)
 {
     glColor3f(red, green, blue);
+
     glBegin(GL_POLYGON);
     for (float i = 0.0; i < 6.2832; i += (6.2832 / vertex)) {
         glVertex2f(center_x + (radius * cos(i)), center_y + (radius * sin(i)));
@@ -36,6 +37,7 @@ void drawWireCircle(float red, float green, float blue, float center_x, float ce
 {
     glColor3f(red, green, blue);
     glLineWidth(lineWidth);
+
     glBegin(GL_LINE_LOOP);
     for (float i = 0.0; i < 6.2832; i += (6.2832 / vertex)) {
         glVertex2f(center_x + (radius * cos(i)), center_y + (radius * sin(i)));
@@ -43,64 +45,59 @@ void drawWireCircle(float red, float green, float blue, float center_x, float ce
     glEnd();
 }
 
-void DrawTank() {
+void DrawPanda() {
     // this is immedidate mode of OpenGL usded prior to OpenGL 3.0
     
-    drawWireCircle(0.0, 1.0, 0.0, 25.0, 25.0, 7.0, 6.0);
+    // Draw tail!
+    drawFilledCircle(0, 0, 0, 25.0, 11.0, 2.0);
     
+    // Draw body!
+    drawFilledCircle(0, 0, 0, 25.0, 19.0, 7.0);
+    drawFilledCircle(1.0, 1.0, 1.0, 25.0, 16.0, 4.0);
     
+    // Draw ears!
+    drawFilledCircle(0, 0, 0, 17.0, 43.0, 4.0);
+    drawFilledCircle(0, 0, 0, 33.0, 43.0, 4.0);
+
+    // Draw head!
+    drawFilledCircle(1.0, 1.0, 1.0, 25.0, 35.0, 10.0);
     
-    // draw hull
-    //glColor3f(0.5f, 0.75f, 0.3f);
-    //glBegin(GL_TRIANGLE_STRIP);
-    //glVertex2f(4.0f, 3.75f);
-    //glVertex2f(4.0f, 6.25f);
-    //glVertex2f(6.0f, 3.75f);
-    //glVertex2f(6.0f, 6.25f);
-    //glEnd();
+    // Draw left eye!
+    drawFilledCircle(0, 0, 0, 20.0, 35.0, 4.0);
+    drawFilledCircle(1.0, 1.0, 1.0, 21.0, 35.0, 2.0);
+    drawFilledCircle(85.0 / 255, 106.0 / 255, 242.0 / 255, 21.5, 35.5, 1.5);
+    drawFilledCircle(0, 0, 0, 22.0, 36.0, .75);
 
-    //// draw turret
-    //glColor3f(0.75f, 0.3f, 0.1f);
-    //glBegin(GL_TRIANGLE_STRIP);
-    //glVertex2f(4.35f, 4.25f);
-    //glVertex2f(4.35f, 5.75f);
-    //glVertex2f(5.65f, 4.25f);
-    //glVertex2f(5.65f, 5.75f);
-    //glEnd();
+    // Draw right eye!
+    drawFilledCircle(0, 0, 0, 30.0, 35.0, 4.0);
+    drawFilledCircle(1.0, 1.0, 1.0, 29.0, 35.0, 2.0);
+    drawFilledCircle(85.0 / 255, 106.0 / 255, 242.0 / 255, 28.5, 35.5, 1.5);
+    drawFilledCircle(0, 0, 0, 28.0, 36.0, .75);
 
-    //// draw gun
-    //glColor3f(0.5f, 0.3f, 0.1f);
-    //glBegin(GL_TRIANGLE_STRIP);
-    //glVertex2f(4.8f, 5.75f);
-    //glVertex2f(4.8f, 7.00f);
-    //glVertex2f(5.2f, 5.75f);
-    //glVertex2f(5.2f, 7.00f);
-    //glEnd();
+    // Draw nose!
+    drawFilledCircle(0, 0, 0, 25.0, 31.0, 2.0);
 
-    //// draw left caterpillar tracks
-    //glColor3f(0.3f, 0.3f, 0.3f);
-    //glBegin(GL_TRIANGLE_STRIP);
-    //glVertex2f(3.5f, 3.5f);
-    //glVertex2f(3.5f, 6.5f);
-    //glVertex2f(4.0f, 3.5f);
-    //glVertex2f(4.0f, 6.5f);
-    //glEnd();
+    // Draw mouth!
+    drawFilledCircle(219.0 / 255, 134.0 / 255, 134.0 / 255, 25.0, 27.0, .75);
 
-    //// draw right caterpillar tracks
-    //glColor3f(0.3f, 0.3f, 0.3f);
-    //glBegin(GL_TRIANGLE_STRIP);
-    //glVertex2f(6.0f, 3.5f);
-    //glVertex2f(6.0f, 6.5f);
-    //glVertex2f(6.5f, 3.5f);
-    //glVertex2f(6.5f, 6.5f);
-    //glEnd();
+    // Draw front paws!
+    drawFilledCircle(0, 0, 0, 18.0, 23.0, 3.0);
+    drawFilledCircle(1.0, 1.0, 1.0, 18.0, 22.0, 2.0);
+    drawFilledCircle(0, 0, 0, 32.0, 23.0, 3.0);
+    drawFilledCircle(1.0, 1.0, 1.0, 32.0, 22.0, 2.0);
+
+    // Draw back paws!
+    drawFilledCircle(0, 0, 0, 19.0, 14.0, 3.0);
+    drawFilledCircle(1.0, 1.0, 1.0, 19.0, 13.0, 2.0);
+    drawFilledCircle(0, 0, 0, 31.0, 14.0, 3.0);
+    drawFilledCircle(1.0, 1.0, 1.0, 31.0, 13.0, 2.0);
 }
 
 // called when the GL context need to be rendered
 void display(void)
 {
     // clear the screen to white, which is the background color
-    glClearColor(1.0, 1.0, 1.0, 0.0);
+    glClearColor(137.0/255, 201.0/255, 135.0/255, 0.0);
 
     // clear the buffer stored for drawing
     glClear(GL_COLOR_BUFFER_BIT);
@@ -113,7 +110,7 @@ void display(void)
     glColor3f(1.0, 0.0, 0.0);
 
     // this is immedidate mode of OpenGL usded prior to OpenGL 3.0
-    DrawTank();
+    DrawPanda();
 
     // specify the color for new drawing
     glColor3f(0.0, 0.0, 1.0);
