@@ -1,3 +1,7 @@
+// Course:  IGME 309
+// Student Name:  Conor Race
+// Friday Exercise  04
+
 #ifdef __APPLE__
 #include <GLUT/glut.h>
 #else
@@ -131,6 +135,13 @@ void update() {
 		// Incorporate collision detection to ascertain when the ball makes contact with the bar.
 		// Upon collision, modify the ball's trajectory by adjusting its velocity, ensuring it bounces back.
 		// write the code below
+
+		if ((ballPos[1] - radius) <= barPos[1] &&
+			ballPos[0] >= (barPos[0] - (barSize / 2.0f)) &&
+			ballPos[0] <= (barPos[0] + (barSize / 2.0f)))
+		{
+			velocity_y *= -1.0f;
+		}
 
 		// write the code above
 		/***********************************************************/
