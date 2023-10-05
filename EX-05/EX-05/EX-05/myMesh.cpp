@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <string>
 #include <time.h>
 using namespace std;
 
@@ -42,7 +43,21 @@ void MyMesh::load(char* fileName)
 
 	/****************************************/
 	// Write your code below
+	string line;
 
+	while ( getline(file, line) )
+	{
+		if (line[0] == 'v') {
+			cout << "This is a vertex!" << endl;
+		}
+
+		else if (line[0] == 'f') {
+			cout << "This is an index!" << endl;
+		}
+		
+		cout << "Line = " << line << endl;
+	}
+	file.close();
 	// Write your code above
 	/****************************************/
 
