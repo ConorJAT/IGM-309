@@ -4,6 +4,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <vector>
 #include <time.h>
 using namespace std;
 
@@ -44,19 +45,36 @@ void MyMesh::load(char* fileName)
 	/****************************************/
 	// Write your code below
 	string line;
+	vector<string> data;
+	int startPos = 0;
 
 	while ( getline(file, line) )
 	{
-		if (line[0] == 'v') {
-			cout << "This is a vertex!" << endl;
+		for (int i = 0; i < line.length(); i++) {
+			if (line[i] == ' ' || i == line.length() - 1) {
+				if (i == line.length() - 1) data.push_back(line.substr(startPos, i - startPos + 1));
+				else data.push_back(line.substr(startPos, i-startPos));
+				startPos = i+1;
+			}
 		}
 
-		else if (line[0] == 'f') {
-			cout << "This is an index!" << endl;
+		if (data[0] == "v") {
+			vertices[2 * vertNum] = stof(data[1]);
+			vertices[2 * vertNum + 1] = stof(data[2]);
+			vertNum++;
+		}
+
+		else if (data[0] == "f") {
+			indices[3 * triNum] = stof(data[1]);
+			indices[3 * triNum + 1] = stof(data[2]);
+			indices[3 * triNum + 2] = stof(data[3]);
+			triNum++;
 		}
 		
-		cout << "Line = " << line << endl;
+		startPos = 0;
+		data.clear();
 	}
+
 	file.close();
 	// Write your code above
 	/****************************************/
