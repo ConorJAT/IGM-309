@@ -8,6 +8,7 @@
 #include <GL/freeglut.h>
 #endif
 
+#include "polyObject.h"
 #include <iostream>
 using namespace std;
 
