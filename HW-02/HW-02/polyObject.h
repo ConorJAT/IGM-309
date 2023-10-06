@@ -13,7 +13,6 @@ class polyObject
 	private:
 		vector<vec2> vertices;			// All vertices in C++ vector.
 		vec3 color;						// Color of polygon.
-		bool isDone;
 
 	public:
 		polyObject();
@@ -25,9 +24,6 @@ class polyObject
 		void draw();					// Draw polygon (if completed).
 		void draw(vec2 p_mousePos);		// Draw polygon (if being created).
 
-		// Helper Functions:
-		void complete();				// Completes shape (no more mouse point involved).
-		bool isCompleted();				// Returns true if the shape is complete.
+		// Helper Function:
 		void restart();					// Clears all verticies of the shape.
 };
-

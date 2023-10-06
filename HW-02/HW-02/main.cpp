@@ -9,20 +9,22 @@
 #endif
 
 #include "polyObject.h"
+#include <vector>
 #include <iostream>
 using namespace std;
 
 float canvasSize[] = { 10.0f, 10.0f };
 int rasterSize[] = { 800, 600 };
 
-polyObject shape;
+polyObject currentShape;
+vector<polyObject> drawnShapes;
 float mousePos[2];
 
 void init(void)
 {
     mousePos[0] = mousePos[1] = 0.0f;
 
-    shape = polyObject();
+    currentShape = polyObject();
 }
 
 void drawCursor()
@@ -43,8 +45,8 @@ void display(void)
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
 
-    if (!shape.isCompleted()) shape.draw(vec2(mousePos[0], mousePos[1]));
-    else shape.draw();
+    currentShape.draw(vec2(mousePos[0], mousePos[1]));
+    for (polyObject s : drawnShapes) s.draw();
 
     drawCursor();
     glutSwapBuffers();
@@ -68,7 +70,7 @@ void mouse(int button, int state, int x, int y)
     if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {
         mousePos[0] = (float)x / rasterSize[0] * canvasSize[0];
         mousePos[1] = (float)(rasterSize[1] - y) / rasterSize[1] * canvasSize[1];
-        shape.addVertex(vec2(mousePos[0], mousePos[1]));
+        currentShape.addVertex(vec2(mousePos[0], mousePos[1]));
 
         glutPostRedisplay();
     }
@@ -87,14 +89,13 @@ void motion(int x, int y)
 void keyboard(unsigned char key, int x, int y)
 {
     switch (key) {
-    case 27:
+    case 27:    // Esc Key
         exit(0);
         break;
-    }
-
-    if (key == 'q')
-    {
-        shape.complete();
+    case 13:    // Enter Key
+        drawnShapes.push_back(currentShape);
+        currentShape = polyObject();
+        break;
     }
 }
 
@@ -102,25 +103,26 @@ void menu(int value)
 {
     switch (value) {
     case 0: // clear
-        shape.restart();
+        currentShape.restart();
+        drawnShapes.clear();
         glutPostRedisplay();
         break;
     case 1: //exit
         exit(0);
     case 2: // red
-        shape.setColor(vec3(1.0f, 0.0f, 0.0f));
+        currentShape.setColor(vec3(1.0f, 0.0f, 0.0f));
         glutPostRedisplay();
         break;
     case 3: // green
-        shape.setColor(vec3(0.0f, 1.0f, 0.0f));
+        currentShape.setColor(vec3(0.0f, 1.0f, 0.0f));
         glutPostRedisplay();
         break;
     case 4: // blue
-        shape.setColor(vec3(0.0f, 0.0f, 1.0f));
+        currentShape.setColor(vec3(0.0f, 0.0f, 1.0f));
         glutPostRedisplay();
         break;
     case 5: // black
-        shape.setColor(vec3(0.0f, 0.0f, 0.0f));
+        currentShape.setColor(vec3(0.0f, 0.0f, 0.0f));
         glutPostRedisplay();
         break;
     default:
@@ -149,7 +151,7 @@ int main(int argc, char* argv[])
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA);
     glutInitWindowSize(rasterSize[0], rasterSize[1]);
-    glutCreateWindow("Mouse Event - Draw a Shape!");
+    glutCreateWindow("Polygon Creator - Draw a Shape!");
 
     glutReshapeFunc(reshape);
     glutDisplayFunc(display);

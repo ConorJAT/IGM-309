@@ -4,7 +4,6 @@
 polyObject::polyObject()
 {
 	color = vec3(0.0f, 0.0f, 0.0f);
-	isDone = false;
 }
 
 polyObject::~polyObject()
@@ -13,8 +12,6 @@ polyObject::~polyObject()
 
 void polyObject::addVertex(vec2 p_vert)
 {
-	if (isDone) { restart(); }
-
 	vertices.push_back(p_vert);
 }
 
@@ -54,18 +51,7 @@ void polyObject::draw(vec2 p_mousePos)
 	glEnd();
 }
 
-void polyObject::complete()
-{
-	isDone = true;
-}
-
-bool polyObject::isCompleted()
-{
-	return isDone;
-}
-
 void polyObject::restart()
 {
 	vertices.clear();
-	isDone = false;
 }
