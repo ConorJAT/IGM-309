@@ -1,3 +1,7 @@
+// Course:  IGME 309
+// Student Name:  Conor Race
+// Friday Exercise:  05
+
 #pragma once
 
 class MyMesh

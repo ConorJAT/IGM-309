@@ -1,3 +1,7 @@
+// Course:  IGME 309
+// Student Name:  Conor Race
+// Friday Exercise:  05
+
 #include "MyMesh.h"
 #include <GL/freeglut.h>
 
@@ -65,9 +69,9 @@ void MyMesh::load(char* fileName)
 		}
 
 		else if (data[0] == "f") {
-			indices[3 * triNum] = stof(data[1]);
-			indices[3 * triNum + 1] = stof(data[2]);
-			indices[3 * triNum + 2] = stof(data[3]);
+			indices[3 * triNum] = stof(data[1]) - 1;
+			indices[3 * triNum + 1] = stof(data[2]) - 1;
+			indices[3 * triNum + 2] = stof(data[3]) - 1;
 			triNum++;
 		}
 		
