@@ -1,3 +1,7 @@
+// Course:  IGME 309
+// Student Name:  Conor Race
+// Assignment Number:  02
+
 #pragma once
 #include <vector>
 #include <glm/glm.hpp>
