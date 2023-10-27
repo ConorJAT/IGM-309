@@ -18,6 +18,13 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="MyMesh.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="MyMesh.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
@@ -129,13 +136,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="D:\Profiles\ctr9664\Downloads\E07-Template\E07-Template\main.cpp" />
-    <ClCompile Include="D:\Profiles\ctr9664\Downloads\E07-Template\E07-Template\MyMesh.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="D:\Profiles\ctr9664\Downloads\E07-Template\E07-Template\MyMesh.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

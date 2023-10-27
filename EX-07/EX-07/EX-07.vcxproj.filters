@@ -15,15 +15,15 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="D:\Profiles\ctr9664\Downloads\E07-Template\E07-Template\main.cpp">
+    <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="D:\Profiles\ctr9664\Downloads\E07-Template\E07-Template\MyMesh.cpp">
+    <ClCompile Include="MyMesh.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="D:\Profiles\ctr9664\Downloads\E07-Template\E07-Template\MyMesh.h">
+    <ClInclude Include="MyMesh.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
