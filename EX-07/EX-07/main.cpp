@@ -1,3 +1,7 @@
+// Course:  IGME 309
+// Student Name:  Conor Race
+// Friday Exercise:  07
+
 #include <GL/glew.h>
 
 #ifdef __APPLE__
@@ -86,7 +90,11 @@ void idle()
 
 	/*****************************/
 	// Write your code below
+	theta += 4.0 * (deltaTime / (3.14159 * 2.0));
+	cam_x = cos(theta) * radius;
+	cam_z = sin(theta) * radius;
 
+	reshape(g_winWidth, g_winHeight);
 	// Write your code above
 	/*****************************/
 
