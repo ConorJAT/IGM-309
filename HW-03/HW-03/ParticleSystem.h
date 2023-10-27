@@ -1,3 +1,7 @@
+// Course:  IGME 309
+// Student Name:  Conor Race
+// Assignment Number:  03
+
 #pragma once
 
 using namespace std;
