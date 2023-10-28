@@ -1,0 +1,16 @@
+<<< Conor Race - A03 - Performence Analysis >>>
+
+Analysis #1 - 500 Particles
+    - FPS: ~1925
+
+Analysis #2 - 5,000 Particles
+    - FPS: ~1450
+
+Analysis #3 - 50,000 Particles
+    - FPS: ~450
+
+Analysis #4 - 500,000 Particles
+    - FPS: ~60
+
+Analysis #5 - 5,000,000 Particles
+    - FPS: ~5

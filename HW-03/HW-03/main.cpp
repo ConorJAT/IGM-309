@@ -29,7 +29,11 @@ unsigned char g_keyStates[256];
 
 // Particle system object
 // You can pass different numbers of particles into the constructor of the particle system object
+// ParticleSystem g_particles = ParticleSystem(500);
 ParticleSystem g_particles = ParticleSystem(5000);
+// ParticleSystem g_particles = ParticleSystem(50000);
+// ParticleSystem g_particles = ParticleSystem(500000);
+// ParticleSystem g_particles = ParticleSystem(5000000);
 
 /*************************************************/
 
