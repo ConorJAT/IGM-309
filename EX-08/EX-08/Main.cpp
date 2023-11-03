@@ -1,3 +1,7 @@
+// Course:  IGME 309
+// Student Name:  Conor Race
+// Friday Exercise:  08
+
 #ifdef __APPLE__
 #include <GLUT/glut.h>
 #else
@@ -28,11 +32,34 @@ void display(void)
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
-
 	/*****************************/
 	// write your code below
 
+	// Draw Pivot Point
+	glPointSize(12.0f);
+	glColor3f(0, 0, 0);
+	glBegin(GL_POINTS);
+	glVertex2f(10.0f, 15.0f);
+	glEnd();
 
+	// Set Rotation Point
+	glTranslatef(10.0f, 15.0f, 0);
+	glRotatef(rotationAngle, 0, 0, 1.0f);
+	glTranslatef(-10.0f, -15.0f, 0);
+
+	// Draw Connecting Line
+	glLineWidth(3.0f);
+	glColor3f(0, 0, 0);
+	glBegin(GL_LINES);
+	glVertex2f(10.0f, 15.0f);
+	glVertex2f(10.0f, 5.0f);
+	glEnd();
+
+	// Draw Pendulum Circle
+	glColor3f(1.0f, 1.0f, 1.0f);
+	glBegin(GL_POLYGON);
+	for (float i = 0.0; i < 6.2832; i += (6.2832 / 30.0)) { glVertex2f(10.0f + (1.5f * cos(i)), 5.0f + (1.5f * sin(i))); }
+	glEnd();
 
 	// write your code above
 	/*****************************/
