@@ -199,7 +199,7 @@ void keyboard(unsigned char key, int x, int y)
         colors[i * 3 + 2] = 0.0f;
     }
 
-    if (key == 'A' && selected > 0)
+    if (key == 'a' && selected > 0)
     { 
         selected--;
         colors[selected * 3 + 0] = 1.0f;
@@ -207,13 +207,16 @@ void keyboard(unsigned char key, int x, int y)
         colors[selected * 3 + 2] = 0.0f;
     }
 
-    if (key == 'D' && selected < 16)
+    if (key == 'd' && selected < 16)
     { 
         selected++; 
         colors[selected * 3 + 0] = 1.0f;
         colors[selected * 3 + 1] = 0.0f;
         colors[selected * 3 + 2] = 0.0f;
     }
+
+    
+
     
 
     glutPostRedisplay();
