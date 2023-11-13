@@ -47,6 +47,7 @@ void init(void)
 
     buttonState = -1;
 
+    colors[0] = 1.0f;
     selected = 0;
 }
 
@@ -193,22 +194,28 @@ void keyboard(unsigned char key, int x, int y)
     if (key == 27) // 'esc' key
         exit(0);
 
-    for (int i = 0; i < MAX_NUM_RECTS; i++) {
-        colors[i * 3 + 0] = 0.0f;
-        colors[i * 3 + 1] = 0.0f;
-        colors[i * 3 + 2] = 0.0f;
-    }
-
-    if (key == 'A' && selected > 0)
+    if (key == 'a' && selected > 0)
     { 
+        for (int i = 0; i < MAX_NUM_RECTS; i++) {
+            colors[i * 3 + 0] = 0.0f;
+            colors[i * 3 + 1] = 0.0f;
+            colors[i * 3 + 2] = 0.0f;
+        }
+
         selected--;
         colors[selected * 3 + 0] = 1.0f;
         colors[selected * 3 + 1] = 0.0f;
         colors[selected * 3 + 2] = 0.0f;
     }
 
-    if (key == 'D' && selected < 16)
+    if (key == 'd' && selected < 15)
     { 
+        for (int i = 0; i < MAX_NUM_RECTS; i++) {
+            colors[i * 3 + 0] = 0.0f;
+            colors[i * 3 + 1] = 0.0f;
+            colors[i * 3 + 2] = 0.0f;
+        }
+
         selected++; 
         colors[selected * 3 + 0] = 1.0f;
         colors[selected * 3 + 1] = 0.0f;
