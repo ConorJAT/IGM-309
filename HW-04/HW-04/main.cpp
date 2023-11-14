@@ -1,6 +1,7 @@
-//Usage:
-//Hold down the number keys , 1-7, to select one or multiple circles.
-//While circle(s) are selected, use the left mouse button to translate and use the right mouse button to rotate.
+// Course:  IGME 309
+// Student Name:  Conor Race
+// Assignment Number:  04
+// Controls: A/D to swap between joints | W/S to rotate the joints.
 
 #ifdef __APPLE__
 #include <GLUT/glut.h>
@@ -14,18 +15,11 @@ using namespace std;
 
 #define MAX_NUM_RECTS 16
 
-#define MAX_NUM_CIRCLE 7
-#define CIRCLE_RADIUM 2.0
-
 int win_width = 600, win_height = 600;
 float canvas_width = 30.0f; float canvas_height = 30.0f;
 
-bool keyStates[256];
-int buttonState;
-float points[4 * MAX_NUM_RECTS];
 float colors[3 * MAX_NUM_RECTS];
 float rotations[MAX_NUM_RECTS];
-
 float translations[2 * MAX_NUM_RECTS] =
 {
     0.0f, 0.0f,     // Torso
@@ -50,9 +44,6 @@ int selected;
 
 void init(void)
 {
-    for (int i = 0; i < 256; i++) {
-        keyStates[i] = false;
-    }
     for (int i = 0; i < MAX_NUM_RECTS; i++) {
         colors[i * 3 + 0] = 0.0f; // red
         colors[i * 3 + 1] = 0.0f; // green
@@ -60,8 +51,6 @@ void init(void)
 
         rotations[i] = 0.0f;
     }
-
-    buttonState = -1;
 
     colors[0] = 1.0f;
     selected = 0;
@@ -88,8 +77,6 @@ void display(void)
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
 
-    // the following codes could be written in a for loop.
-    // Here I expand them so that you can better trace the changes of cirlce's coordinate system.
     int current;
 
     current = 0;    // Lower Torso
@@ -223,7 +210,7 @@ void keyboard(unsigned char key, int x, int y)
     if (key == 27) // 'esc' key
         exit(0);
 
-    if (key == 'a' && selected > 0)
+    if (key == 'a' && selected > 0) // Move to next shape in hierarchy (if able).
     { 
         for (int i = 0; i < MAX_NUM_RECTS; i++) {
             colors[i * 3 + 0] = 0.0f;
@@ -237,7 +224,7 @@ void keyboard(unsigned char key, int x, int y)
         colors[selected * 3 + 2] = 0.0f;
     }
 
-    if (key == 'd' && selected < 15)
+    if (key == 'd' && selected < 15) // Move to previous shape in hierarchy (if able).
     { 
         for (int i = 0; i < MAX_NUM_RECTS; i++) {
             colors[i * 3 + 0] = 0.0f;
@@ -251,7 +238,7 @@ void keyboard(unsigned char key, int x, int y)
         colors[selected * 3 + 2] = 0.0f;
     }
     
-    if (key == 'w') 
+    if (key == 'w') // Rotate the selected shape (and its connected children, if any).
     {
         rotations[selected] += (3.14159 / 4.0f);
     }
@@ -264,19 +251,6 @@ void keyboard(unsigned char key, int x, int y)
     glutPostRedisplay();
 }
 
-void keyboardUp(unsigned char key, int x, int y)
-{
-    unsigned char asciiOffset = 49; // see an ascii table
-    for (unsigned char i = '1'; i < '7'; i++) {
-        if (key == i) {
-            keyStates[i] = false;
-            colors[(i - asciiOffset) * 3 + 0] = 0.0f;
-            colors[(i - asciiOffset) * 3 + 1] = 0.0f;
-            colors[(i - asciiOffset) * 3 + 2] = 0.0f;
-        }
-    }
-    glutPostRedisplay();
-}
 
 int main(int argc, char* argv[])
 {
@@ -284,13 +258,11 @@ int main(int argc, char* argv[])
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA);
     glutInitWindowSize(win_width, win_height);
-    glutCreateWindow("2D Transformation Tree");
+    glutCreateWindow("HW-04: Friendly Robot!");
 
     glutReshapeFunc(reshape);
     glutDisplayFunc(display);
     glutKeyboardFunc(keyboard);
-    glutKeyboardUpFunc(keyboardUp);
     glutMainLoop();
     return 0;
-
 }
