@@ -80,14 +80,17 @@ void display(void)
     glTranslatef(translations[current * 2 + 0], translations[current * 2 + 1], 0.0f);
     glRotatef(rotations[current], 0.0f, 0.0f, 1.0f);
     glTranslatef(-translations[current * 2 + 0], -translations[current * 2 + 1], 0.0f);
+    glPopMatrix();
     drawQuad(-2.0f, 2.0f, 2.0f, 0.0f, colors + (current * 3));
 
+    glPushMatrix();
     current = 1;    // Upper Chest
     glTranslatef(translations[current * 2 + 0], translations[current * 2 + 1], 0.0f);
     glRotatef(rotations[current], 0.0f, 0.0f, 1.0f);
     glTranslatef(-translations[current * 2 + 0], -translations[current * 2 + 1], 0.0f);
     drawQuad(-3.0f, 3.0f, 5.0f, 2.0f, colors + (current * 3));
 
+    glPushMatrix();
     current = 2;    // Neck
     glTranslatef(translations[current * 2 + 0], translations[current * 2 + 1], 0.0f);
     glRotatef(rotations[current], 0.0f, 0.0f, 1.0f);
@@ -99,7 +102,9 @@ void display(void)
     glRotatef(rotations[current], 0.0f, 0.0f, 1.0f);
     glTranslatef(-translations[current * 2 + 0], -translations[current * 2 + 1], 0.0f);
     drawQuad(-1.5f, 1.5f, 9.0f, 6.0f, colors + (current * 3));
+    glPopMatrix();
 
+    glPushMatrix();
     current = 4;    // Left Bicep
     glTranslatef(translations[current * 2 + 0], translations[current * 2 + 1], 0.0f);
     glRotatef(rotations[current], 0.0f, 0.0f, 1.0f);
@@ -117,7 +122,9 @@ void display(void)
     glRotatef(rotations[current], 0.0f, 0.0f, 1.0f);
     glTranslatef(-translations[current * 2 + 0], -translations[current * 2 + 1], 0.0f);
     drawQuad(-11.0f, -9.0f, 5.5f, 3.5f, colors + (current * 3));
+    glPopMatrix();
 
+    glPushMatrix();
     current = 7;    // Right Bicep
     glTranslatef(translations[current * 2 + 0], translations[current * 2 + 1], 0.0f);
     glRotatef(rotations[current], 0.0f, 0.0f, 1.0f);
@@ -135,7 +142,10 @@ void display(void)
     glRotatef(rotations[current], 0.0f, 0.0f, 1.0f);
     glTranslatef(-translations[current * 2 + 0], -translations[current * 2 + 1], 0.0f);
     drawQuad(9.0f, 11.0f, 5.5f, 3.5f, colors + (current * 3));
+    glPopMatrix();
+    glPopMatrix();
 
+    glPushMatrix();
     current = 10;   // Left Thigh
     glTranslatef(translations[current * 2 + 0], translations[current * 2 + 1], 0.0f);
     glRotatef(rotations[current], 0.0f, 0.0f, 1.0f);
@@ -153,7 +163,9 @@ void display(void)
     glRotatef(rotations[current], 0.0f, 0.0f, 1.0f);
     glTranslatef(-translations[current * 2 + 0], -translations[current * 2 + 1], 0.0f);
     drawQuad(-4.0f, -1.0f, -6.0f, -8.0f, colors + (current * 3));
+    glPopMatrix();
 
+    glPushMatrix();
     current = 13;   // Right Thigh
     glTranslatef(translations[current * 2 + 0], translations[current * 2 + 1], 0.0f);
     glRotatef(rotations[current], 0.0f, 0.0f, 1.0f);
@@ -171,6 +183,7 @@ void display(void)
     glRotatef(rotations[current], 0.0f, 0.0f, 1.0f);
     glTranslatef(-translations[current * 2 + 0], -translations[current * 2 + 1], 0.0f);
     drawQuad(1.0f, 4.0f, -6.0f, -8.0f, colors + (current * 3));
+    glPopMatrix();
 
     glutSwapBuffers();
 }
@@ -222,6 +235,15 @@ void keyboard(unsigned char key, int x, int y)
         colors[selected * 3 + 2] = 0.0f;
     }
     
+    if (key == 'w') 
+    {
+        rotations[selected] += (3.14159 / 4.0f);
+    }
+
+    if (key == 's') 
+    {
+        rotations[selected] -= (3.14159 / 4.0f);
+    }
 
     glutPostRedisplay();
 }
