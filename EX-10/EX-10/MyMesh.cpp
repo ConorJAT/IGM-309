@@ -136,6 +136,8 @@ void MyMesh::loadFromOBJ(const char* fileName)
 		//cout << "v[" << i<<"]'s normal=" << vNormals[i * 3 + 0] << "," << vNormals[i * 3 + 1] << "," << vNormals[i * 3 + 2] << endl;
 	}
 
+	computeAABB();
+
 	prepareBufferObjects();
 }
 
@@ -195,6 +197,57 @@ void MyMesh::draw()
 		break;
 	}
 
+	glPopMatrix();
+}
+
+void MyMesh::drawAABB()
+{
+	glDisable(GL_LIGHTING);
+
+	glMatrixMode(GL_MODELVIEW);
+	glPushMatrix();
+	glColor3f(1.0f, 0.0f, 0.0f);
+
+	glBegin(GL_LINES);
+		// Cieling Square
+		glVertex3f(maxVert.x, maxVert.y, maxVert.z);
+		glVertex3f(minVert.x, maxVert.y, maxVert.z);
+
+		glVertex3f(minVert.x, maxVert.y, maxVert.z);
+		glVertex3f(minVert.x, maxVert.y, minVert.z);
+
+		glVertex3f(minVert.x, maxVert.y, minVert.z);
+		glVertex3f(maxVert.x, maxVert.y, minVert.z);
+
+		glVertex3f(maxVert.x, maxVert.y, minVert.z);
+		glVertex3f(maxVert.x, maxVert.y, maxVert.z);
+
+		// Floor Square
+		glVertex3f(maxVert.x, minVert.y, maxVert.z);
+		glVertex3f(minVert.x, minVert.y, maxVert.z);
+							  
+		glVertex3f(minVert.x, minVert.y, maxVert.z);
+		glVertex3f(minVert.x, minVert.y, minVert.z);
+							  
+		glVertex3f(minVert.x, minVert.y, minVert.z);
+		glVertex3f(maxVert.x, minVert.y, minVert.z);
+							  
+		glVertex3f(maxVert.x, minVert.y, minVert.z);
+		glVertex3f(maxVert.x, minVert.y, maxVert.z);
+
+		// Cieling-to-Floor Lines
+		glVertex3f(maxVert.x, maxVert.y, maxVert.z);
+		glVertex3f(maxVert.x, minVert.y, maxVert.z);
+
+		glVertex3f(minVert.x, maxVert.y, maxVert.z);
+		glVertex3f(minVert.x, minVert.y, maxVert.z);
+
+		glVertex3f(minVert.x, maxVert.y, minVert.z);
+		glVertex3f(minVert.x, minVert.y, minVert.z);
+
+		glVertex3f(maxVert.x, maxVert.y, minVert.z);
+		glVertex3f(maxVert.x, minVert.y, minVert.z);
+	glEnd();
 	glPopMatrix();
 }
 
@@ -265,4 +318,21 @@ void MyMesh::drawWireframeMesh()
 
 
 	glPopMatrix();
+}
+
+void MyMesh::computeAABB()
+{
+	maxVert = vec3(-1.0f, 0.0f, -1.0f);
+	minVert = vec3(1.0f, 2.0f, 1.0f);
+	
+	for (unsigned int i = 0; i < vertNum; i++) 
+	{
+		if (vertices[i * 3 + 0] > maxVert.x) { maxVert.x = vertices[i * 3 + 0]; }	// Highest x
+		if (vertices[i * 3 + 1] > maxVert.y) { maxVert.y = vertices[i * 3 + 1]; }	// Highest y
+		if (vertices[i * 3 + 2] > maxVert.z) { maxVert.z = vertices[i * 3 + 2]; }	// Highest z
+		
+		if (vertices[i * 3 + 0] < minVert.x) { minVert.x = vertices[i * 3 + 0]; }	// Lowest x
+		if (vertices[i * 3 + 1] < minVert.y) { minVert.y = vertices[i * 3 + 1]; }	// Lowest y
+		if (vertices[i * 3 + 2] < minVert.z) { minVert.z = vertices[i * 3 + 2]; }	// Lowest z
+	}
 }

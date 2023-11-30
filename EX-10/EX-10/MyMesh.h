@@ -29,6 +29,10 @@ private:
 	unsigned int vertNum;
 	unsigned int triNum;
 
+	// Min and max values from all vertices.
+	vec3 maxVert;
+	vec3 minVert;
+
 	// In the future, we will define more vertex and triangle related parameters...
 	// vertex normals; - vertNum *3
 	// face normals;  - triNum *3
@@ -50,6 +54,9 @@ private:
 	void drawShadedMesh();		// draw shaded mesh and can be used to draw inteermediate versions of the mesh
 	void drawWireframeMesh();	// draw the mesh in wireframe and can be used to draw intermediate versions of the mesh
 
+	// Calculates the bounding box for the 3D object.
+	void computeAABB();
+
 
 public:
 	MyMesh();
@@ -58,6 +65,9 @@ public:
 	void loadFromOBJ(const char* fileName);     // called at initialization
 	void update();   // usually called in idle, mouse, motion, keyboard callbacks
 	void draw();     // called in display callback;
+
+	// Draws the bounding box for the 3D object.
+	void drawAABB();
 
 	unsigned int getVertNum() { return vertNum; };
 	unsigned int getTriNum() { return triNum; };

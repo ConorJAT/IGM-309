@@ -100,6 +100,7 @@ void display()
 	// add things you'd like to draw ....
 
 	g_mesh.draw();
+	g_mesh.drawAABB();
 	g_cam.drawCoordinateOnScreen(g_winWidth, g_winHeight);
 	g_cam.drawCoordinate();
 
