@@ -1,3 +1,7 @@
+// Course:  IGME 309
+// Student Name:  Conor Race
+// Friday Exercise:  10
+
 #include <GL/glew.h>
 
 #ifdef __APPLE__
