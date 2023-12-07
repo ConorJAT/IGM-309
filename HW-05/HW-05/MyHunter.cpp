@@ -9,21 +9,21 @@ MyHunter::MyHunter(vec2 _position, int _ID)
 	// customize your player
 
 	// customize the name of your player
-	playerName = "hunter" + to_string(ID);
+	playerName = "Wolfpack-Conor-" + to_string(ID);
 
 	// upgrade your player by calling the upgrade(armor, speed, shotgun, bullet) function
 	// You have a total of 20 points for upgrading, 
 	// and each attribute (armor, speed, shotgun, and bullet) can’t exceed 10 points. 
 	unsigned int armorPoint = 0;
 	unsigned int speedPoint = 0;
-	unsigned int shotgunPoint = 0;
-	unsigned int bulletPoint = 0;
+	unsigned int shotgunPoint = 10;
+	unsigned int bulletPoint = 10;
 	upgrade(armorPoint, speedPoint, shotgunPoint, bulletPoint);
 
 	// customize the color of your player
-	bodyColor = vec3(1.0f, 0.0f, 0.0f);
-	headColor = vec3(0.7f, 0.1f, 0.1f);
-	shotgunColor = vec3(0.0f, 0.0f, 0.0f);
+	bodyColor = vec3(0.75f, 0.42f, 0.13f);
+	headColor = vec3(0.27f, 0.18f, 0.02f);
+	shotgunColor = vec3(0.96f, 0.83f, 0.62f);
 	bulletColor = vec3(0.0f, 0.0f, 0.0f);
 	// write your code above
 	/******************************/
@@ -63,6 +63,30 @@ void MyHunter::update(float _deltaTime, const vector<Monster*> _monsters, const 
 			}
 		}
 
+		// Only make calculations when there is a closest enemy.
+		if (nearestMonster != nullptr)
+		{
+			vec2 direction;
+			
+			// Calculate direction and distances between hunter and closest enemy.
+			direction.x = (this->position.x - nearestMonster->position.x);
+			direction.y = (this->position.y - nearestMonster->position.y);
+			float distance = sqrtf(powf(direction.x, 2) + powf(direction.y, 2));
+			
+			// Calculate rotation and set rotation of hunter to face the closest enemy.
+			float angle = glm::degrees(atan(direction.y / direction.x));
+			if (direction.x <= 0) this->rotation = angle;
+			if (direction.x >= 0) this->rotation = angle + 180.0f;
+
+			// Normalize direction vector.
+			vec2 directionNormal = vec2(direction.x / distance, direction.y / distance);
+
+			// Update hunter's movement.
+			this->position.x += speed * directionNormal.x * _deltaTime;
+			this->position.y += speed * directionNormal.y * _deltaTime;
+		}
+			
+
 		// Write your implementation above
 		/************************************************************/
 
@@ -82,6 +106,11 @@ bool MyHunter::circleCollision(vec2 c1, vec2 c2, float r1, float r2)
 {
 	/***************************************/
 	// return whether or not two circles are intersected
+	float distance;
+	distance = powf((c1.x - c2.x), 2) + powf((c1.y - c2.y), 2);
+	
+	if (distance < powf((r1 + r2), 2)) return true;
+
 	return false;
 	/***************************************/
 }
