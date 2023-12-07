@@ -15,9 +15,9 @@ MyHunter::MyHunter(vec2 _position, int _ID)
 	// You have a total of 20 points for upgrading, 
 	// and each attribute (armor, speed, shotgun, and bullet) can’t exceed 10 points. 
 	unsigned int armorPoint = 0;
-	unsigned int speedPoint = 0;
-	unsigned int shotgunPoint = 10;
-	unsigned int bulletPoint = 10;
+	unsigned int speedPoint = 3;
+	unsigned int shotgunPoint = 8;
+	unsigned int bulletPoint = 9;
 	upgrade(armorPoint, speedPoint, shotgunPoint, bulletPoint);
 
 	// customize the color of your player
