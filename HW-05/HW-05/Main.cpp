@@ -1,3 +1,7 @@
+// Course:  IGME 309
+// Student Name:  Conor Race
+// Assignment Number:  05
+
 #ifdef __APPLE__
 #include <GLUT/glut.h>
 #else

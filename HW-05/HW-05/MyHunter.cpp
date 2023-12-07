@@ -16,8 +16,8 @@ MyHunter::MyHunter(vec2 _position, int _ID)
 	// and each attribute (armor, speed, shotgun, and bullet) can’t exceed 10 points. 
 	unsigned int armorPoint = 0;
 	unsigned int speedPoint = 3;
-	unsigned int shotgunPoint = 8;
-	unsigned int bulletPoint = 9;
+	unsigned int shotgunPoint = 10;
+	unsigned int bulletPoint = 7;
 	upgrade(armorPoint, speedPoint, shotgunPoint, bulletPoint);
 
 	// customize the color of your player
@@ -82,8 +82,18 @@ void MyHunter::update(float _deltaTime, const vector<Monster*> _monsters, const 
 			vec2 directionNormal = vec2(direction.x / distance, direction.y / distance);
 
 			// Update hunter's movement.
-			this->position.x += speed * directionNormal.x * _deltaTime;
-			this->position.y += speed * directionNormal.y * _deltaTime;
+			if (distance >= 125.0f) 
+			{
+				this->position.x += speed * -directionNormal.x * _deltaTime;
+				this->position.y += speed * -directionNormal.y * _deltaTime;
+			}
+			else 
+			{
+				this->position.x += speed * directionNormal.x * _deltaTime;
+				this->position.y += speed * directionNormal.y * _deltaTime;
+			}
+
+			
 		}
 			
 
@@ -187,6 +197,8 @@ void MyHunter::drawLifeBar()
 void MyHunter::fire()
 {
 	Bullet::bullets.push_back(new Bullet(this->position, this->rotation, this, this->bulletSpeed, this->bulletColor));
+	// Bullet::bullets.push_back(new Bullet(this->position, this->rotation + 10.0f, this, this->bulletSpeed, this->bulletColor));
+	// Bullet::bullets.push_back(new Bullet(this->position, this->rotation - 10.0f, this, this->bulletSpeed, this->bulletColor));
 }
 
 void MyHunter::getDamagePoint(int _damage)
