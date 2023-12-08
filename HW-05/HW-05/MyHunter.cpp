@@ -82,12 +82,12 @@ void MyHunter::update(float _deltaTime, const vector<Monster*> _monsters, const 
 			vec2 directionNormal = vec2(direction.x / distance, direction.y / distance);
 
 			// Update hunter's movement.
-			if (distance >= 125.0f) 
+			if (distance > 125.0f) 
 			{
 				this->position.x += speed * -directionNormal.x * _deltaTime;
 				this->position.y += speed * -directionNormal.y * _deltaTime;
 			}
-			else 
+			else if (distance < 125.0f)
 			{
 				this->position.x += speed * directionNormal.x * _deltaTime;
 				this->position.y += speed * directionNormal.y * _deltaTime;
